@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DialogueSequence : MonoBehaviour
+public class DialogueSequenceAsset : MonoBehaviour
 {
     #region Singleton
-    public static DialogueSequence instance;
+    public static DialogueSequenceAsset instance;
 
     void Awake()
     {
