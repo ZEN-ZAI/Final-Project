@@ -2,8 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class UtilitySlot
+{
+    public bool uesd;
+    public Transform transform;
+}
 public class ConstructControl : MonoBehaviour
 {
+    public List<UtilitySlot> utilitySlots;
+    public Transform lookAtThis;
     public List<ConstructBase> constructBase_list;
     public float height;
 
@@ -15,6 +23,32 @@ public class ConstructControl : MonoBehaviour
             {
                 constructBase_list.Add(transform.GetChild(i).GetComponent<ConstructBase>());
             }
+        }
+    }
+
+    public UtilitySlot GetUtilitySlot()
+    {
+        foreach (var item in utilitySlots)
+        {
+            if (!item.uesd)
+            {
+                return item;
+                
+            }
+        }
+
+        return null;
+    }
+
+    public Transform GetLookAt()
+    {
+        if (lookAtThis == null)
+        {
+            return transform;
+        }
+        else
+        {
+            return lookAtThis;
         }
     }
 

@@ -13,6 +13,7 @@ public class StateController : MonoBehaviour
     public EmployeeData employeeData;
 
     public GameObject targetObject;
+    public UtilitySlot utilitySlot;
 
     public StateAI current_StateAI;
     public ActionAI current_ActionAI;
@@ -21,7 +22,7 @@ public class StateController : MonoBehaviour
     {
         agent = GetComponent<Agent>();
         animationController = GetComponent<AnimationController>();
-        //employeeData = GetComponent<StateController>().employeeData;
+
         agent.SetSpeed(character.speed);
 
         print("employeeData.construct "+ employeeData.construct);
@@ -82,5 +83,10 @@ public class StateController : MonoBehaviour
     public void AnimationWork()
     {
         animationController.Work();
+    }
+
+    public void LookAt(Transform transform)
+    {
+        transform.LookAt(transform);
     }
 }

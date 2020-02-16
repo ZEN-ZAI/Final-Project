@@ -12,3 +12,6 @@ public class CertificateStructure
 {
     public CertificateType certificateType;
 }
+
+
+

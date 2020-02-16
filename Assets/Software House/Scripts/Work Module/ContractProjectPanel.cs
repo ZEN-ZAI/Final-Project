@@ -83,9 +83,9 @@ public class ContractProjectPanel : MonoBehaviour
         projectType.text = contractData.contractType.ToString();
         dueDate.text = contractData.dueDate.week + "/"+ contractData.dueDate.month + "/"+ contractData.dueDate.year;
 
-        pay.text = contractData.reward.money.ToString();
-        exp.text = contractData.reward.exp.ToString();
-        fire.text = contractData.fine.money.ToString();
+        pay.text = contractData.reward.money.ToString("C0").Replace("$", "");
+        exp.text = contractData.reward.exp.ToString("C0").Replace("$", "");
+        fire.text = contractData.fine.money.ToString("C0").Replace("$", "");
 
         processBar.fillAmount = contractData.processCurrent / contractData.processMax;
 

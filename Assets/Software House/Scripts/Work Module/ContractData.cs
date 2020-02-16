@@ -168,7 +168,7 @@ public class ContractData
 
     private bool ProcessComponent(string employeeID, List<ComponentData> componentDatas)
     {
-        bool update = false; ;
+        bool update = false;
         foreach (ComponentData componentData in componentDatas)
         {
             int power = EmployeeManager.instance.GetPowerByEmployeeID(employeeID, componentData);

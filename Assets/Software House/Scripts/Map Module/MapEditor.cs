@@ -181,8 +181,7 @@ public class MapEditor : MonoBehaviour
                 RaycastHit hit;
 
                 if (Physics.Raycast(ray, out hit) && hit.collider.GetComponent<ConstructSlot>() != null && (
-                    hit.collider.GetComponent<ConstructSlot>().construct.constructType == ConstructType.Ground ||
-                    hit.collider.GetComponent<ConstructSlot>().construct.constructType == ConstructType.GroundTemplate))
+                    hit.collider.GetComponent<ConstructSlot>().construct.constructType == ConstructType.Ground))
                 {
                     if (Input.GetMouseButtonDown(0))
                     {

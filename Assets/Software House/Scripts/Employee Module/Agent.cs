@@ -42,4 +42,11 @@ public class Agent : MonoBehaviour
         this.moveDirection = direction;
         agent.Move(moveDirection);
     }
+
+    public void RotateTowards(Transform target)
+    {
+        Vector3 direction = (target.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation,Time.deltaTime * 100f);
+    }
 }

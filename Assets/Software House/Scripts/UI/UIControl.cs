@@ -78,10 +78,10 @@ public class UIControl : MonoBehaviour
 
             companyName.text = company.name;
             companyLevel.text = "Lv." + company.level;
-            companyEXP.text = company.exp + "/"+ CompanyStructure.instance.GetCompanyMaxExp();
+            companyEXP.text = company.exp.ToString("C0").Replace("$", "") + "/"+ CompanyStructure.instance.GetCompanyMaxExp().ToString("C0").Replace("$", "") ;
             //companyTier.text = company.tier;
             //companyPopular.text = company.popular + "";
-            companyMoney.text = company.money + "";
+            companyMoney.text = company.money.ToString("C0").Replace("$","");
         }
     }
 }

@@ -30,6 +30,9 @@ public class SoundManager : MonoBehaviour
 
     public AudioClip dialogPimp;
 
+    public AudioClip button1;
+    public AudioClip buttonClose;
+
     private void Start()
     {
         SetBGM();
@@ -74,14 +77,18 @@ public class SoundManager : MonoBehaviour
         mainAudio.Play();
     }
 
-    public void PlaySoundEffect(AudioClip audioClip)
-    {
-        supportAudio.PlayOneShot(audioClip);
-    }
-
     public void PlayDialogPimp()
     {
         supportAudio.PlayOneShot(dialogPimp);
     }
 
+    public void PlaySound_Button1()
+    {
+        supportAudio.PlayOneShot(button1);
+    }
+
+    public void PlaySound_ButtonClose()
+    {
+        supportAudio.PlayOneShot(button1);
+    }
 }

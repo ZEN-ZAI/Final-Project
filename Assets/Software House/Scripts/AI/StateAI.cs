@@ -26,7 +26,7 @@ public class StateAI : ScriptableObject
         }
     }
 
-    private void ExitActions(StateController controller)
+    public void ExitActions(StateController controller)
     {
         foreach (ActionAI action in exitActions)
         {

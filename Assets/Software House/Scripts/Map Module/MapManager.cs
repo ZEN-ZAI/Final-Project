@@ -20,6 +20,7 @@ public class MapManager : MonoBehaviour
     public Transform furnitureRoot;
     public Transform relaxRoot;
     public Transform workRoot;
+    public Transform barrierRoot;
 
     private MapBuilder mapBuilder;
     private MapEditor mapEditor;
@@ -67,6 +68,7 @@ public class MapManager : MonoBehaviour
         mapBuilder.BuildMap(MapStructure.instance.GetWallLayer());
         mapBuilder.BuildMap(MapStructure.instance.GetRelaxLayer());
         mapBuilder.BuildMap(MapStructure.instance.GetWorkLayer());
+        mapBuilder.BuildMap(MapStructure.instance.GetBarrierLayer());
 
         Invoke("Placment", 0.5f);
     }
@@ -124,7 +126,7 @@ public class MapManager : MonoBehaviour
 
     public void GenerateGround(int row, int column)
     {
-        mapBuilder.GenerateGround(row, column);
+        mapBuilder.GenerateGround(row+1, column+1);
 
         Invoke("Placment", 0.5f);
     }
@@ -180,6 +182,7 @@ public class MapManager : MonoBehaviour
         List<ConstructData> furniture_layer = new List<ConstructData>();
         List<ConstructData> relax_layer = new List<ConstructData>();
         List<ConstructData> work_layer = new List<ConstructData>();
+        List<ConstructData> barrier_layer = new List<ConstructData>();
 
         for (int i = 0; i < groundRoot.childCount; i++)
         {
@@ -206,11 +209,17 @@ public class MapManager : MonoBehaviour
             work_layer.Add(workRoot.GetChild(i).GetComponent<ConstructSlot>().constructData);
         }
 
+        for (int i = 0; i < barrierRoot.childCount; i++)
+        {
+            barrier_layer.Add(barrierRoot.GetChild(i).GetComponent<ConstructSlot>().constructData);
+        }
+
         MapStructure.instance.SetGroundLayer(ground_layer);
         MapStructure.instance.SetWallLayer(wall_layer);
         MapStructure.instance.SetFurnitureLayer(furniture_layer);
         MapStructure.instance.SetRelaxLayer(relax_layer);
         MapStructure.instance.SetWorkLayer(work_layer);
+        MapStructure.instance.SetBarrierLayer(barrier_layer);
     }
 
     public Transform FindNearRelaxObject(Transform transform)

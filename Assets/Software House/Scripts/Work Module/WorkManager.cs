@@ -157,6 +157,39 @@ public class WorkManager : MonoBehaviour
         int profit = cost - income;
         int fan = (unitSelling / 100) * UnityEngine.Random.Range(1, 25);
 
+        product.fan = fan;
+        int allLevelComponent_temp = 0;
+
+        foreach (ComponentData componentRequirements in product.genreDatas)
+        {
+            allLevelComponent_temp += componentRequirements.productLevel;
+        }
+        foreach (ComponentData componentRequirements in product.cameraDatas)
+        {
+            allLevelComponent_temp += componentRequirements.productLevel;
+        }
+        foreach (ComponentData componentRequirements in product.themeDatas)
+        {
+            allLevelComponent_temp += componentRequirements.productLevel;
+        }
+        foreach (ComponentData componentRequirements in product.graphicDatas)
+        {
+            allLevelComponent_temp += componentRequirements.productLevel;
+        }
+        foreach (ComponentData componentRequirements in product.featureDatas)
+        {
+            allLevelComponent_temp += componentRequirements.productLevel;
+        }
+        foreach (ComponentData componentRequirements in product.platformDatas)
+        {
+            allLevelComponent_temp += componentRequirements.productLevel;
+        }
+
+        product.income = allLevelComponent_temp*10000;
+        product.profit = allLevelComponent_temp* 10000;
+
+        MessageSystem.instance.UpdateMessage("ได้รับเงินจาก Product["+ product.name+ "] ในสัปดาห์นี้ "+allLevelComponent_temp * 10000+" G");
+
         saleReport.Set(GameTimeStructure.instance.GetGameTimeStructure(), unitSelling, price, cost, income, profit, cost);
         product.timeStamp = GameTimeStructure.instance.GetFutureTime(1);
         product.AddSaleReport(saleReport);

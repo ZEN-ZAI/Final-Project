@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MapBuilder : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class MapBuilder : MonoBehaviour
     private Transform furnitureRoot;
     public Transform relaxRoot;
     public Transform workRoot;
+    public Transform barrierRoot;
 
     [SerializeField] private Vector3 position;
     public List<ConstructControl> construct_list = new List<ConstructControl>();
@@ -20,6 +22,7 @@ public class MapBuilder : MonoBehaviour
         this.furnitureRoot = MapManager.instance.furnitureRoot;
         this.relaxRoot = MapManager.instance.relaxRoot;
         this.workRoot = MapManager.instance.workRoot;
+        this.barrierRoot = MapManager.instance.barrierRoot;
     }
 
     public void BuildMap(List<ConstructData> ConstructData_Layer)
@@ -66,6 +69,11 @@ public class MapBuilder : MonoBehaviour
 
                 construct_list.Add(tempFurniture.GetComponent<ConstructControl>());
             }
+            else if (constructAsset[index].constructType == ConstructType.Barrier)
+            {
+                GenerateConstruct(ConstructAsset.instance.GetBarrier(),
+                    new Vector3(constructData.x, constructData.y + 0.1f, constructData.z), constructData, barrierRoot);
+            }
         }
     }
 
@@ -89,16 +97,29 @@ public class MapBuilder : MonoBehaviour
         position.z = -((column * 10) / 2) + 5;
 
         Construct constructGround = ConstructAsset.instance.groundAsset[0];
+        Construct barrier = ConstructAsset.instance.GetBarrier();
         GameObject tempGround = null;
 
         for (int y = 0; y < column; y++)
         {
             for (int x = 0; x < row; x++)
             {
-                tempGround = GenerateConstruct(constructGround, position, new ConstructData(), groundRoot);
-                tempGround.GetComponent<ConstructSlot>().constructData.Set(constructGround.constructID, (int)position.x, (int)position.z, 0, 0);
+                if (y == 0|| (x == 0 && y > 0)|| y == column-1 || x == row-1 )
+                {
+                    tempGround = GenerateConstruct(barrier, position, new ConstructData(), barrierRoot);
+                    tempGround.GetComponent<ConstructSlot>().constructData.Set(barrier.constructID, (int)position.x, (int)position.z, 0, 0);
 
-                position.z += tempGround.transform.localScale.x;
+                    position.z += tempGround.transform.localScale.x;
+                }
+                else
+                {
+                    tempGround = GenerateConstruct(constructGround, position, new ConstructData(), groundRoot);
+                    tempGround.GetComponent<ConstructSlot>().constructData.Set(constructGround.constructID, (int)position.x, (int)position.z, 0, 0);
+
+                    position.z += tempGround.transform.localScale.x;
+
+                }
+
             }
             position.x += tempGround.transform.localScale.x;
             position.z = -((column * 10) / 2) + 5;

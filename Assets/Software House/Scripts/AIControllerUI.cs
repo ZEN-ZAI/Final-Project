@@ -33,6 +33,8 @@ public class AIControllerUI : MonoBehaviour
 
     public Button buttonClosePanel;
 
+    public bool active;
+
     [SerializeField] private EmployeeData employeeData;
     [SerializeField] private StateController stateController;
 
@@ -46,6 +48,7 @@ public class AIControllerUI : MonoBehaviour
     public void Set(StateController stateController)
     {
         panel.gameObject.SetActive(true);
+        active = true;
 
         this.stateController = stateController;
         this.employeeData = stateController.employeeData;
@@ -57,16 +60,19 @@ public class AIControllerUI : MonoBehaviour
 
     public void ChangeToRelex()
     {
+        stateController.current_StateAI.ExitActions(stateController);
         stateController.current_StateAI = AIAsset.instance.FindState("RandomToRelexObject (StateAI)");
     }
 
     public void ChangeToWork()
     {
+        stateController.current_StateAI.ExitActions(stateController);
         stateController.current_StateAI = AIAsset.instance.FindState("RandomToWorkObject (StateAI)");
     }
 
     public void ClosePanel()
     {
+        active = false;
         employeeData = null;
         stateController = null;
         panel.gameObject.SetActive(false);

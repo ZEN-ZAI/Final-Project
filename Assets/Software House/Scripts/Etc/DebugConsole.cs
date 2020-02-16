@@ -79,6 +79,7 @@ public class DebugConsole : MonoBehaviour
 
                 case "save":
 
+                    MapManager.instance.UpdateMapLayer();
                     GameManager.instance.SyncToFirebase();
                     Debug.Log("Update data to Firebase");
                     previousCommand.Push(command);
@@ -125,6 +126,12 @@ public class DebugConsole : MonoBehaviour
                     {
                         return;
                     }
+
+                    if (row > 20 || column > 20)
+                    {
+                        return;
+                    }
+
 
                     MapManager.instance.RemoveGround();
                     MapManager.instance.GenerateGround(row, column);

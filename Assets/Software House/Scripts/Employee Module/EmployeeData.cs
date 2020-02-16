@@ -8,7 +8,7 @@ public class EmployeeData
 {
     public string employeeID;
     public int characterID;
-    public string name;
+    public string employeeName;
 
     public int salary;
 
@@ -125,7 +125,7 @@ public class EmployeeData
 
         result["employeeID"] = employeeID;
         result["characterID"] = characterID;
-        result["name"] = name;
+        result["employeeName"] = employeeName;
 
         result["salary"] = salary;
 

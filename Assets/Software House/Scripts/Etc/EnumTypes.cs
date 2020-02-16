@@ -8,7 +8,7 @@ public enum GameState
 
 [Serializable]
 public enum ConstructType
-{ None, GroundTemplate, Ground, Wall, Furniture, Relax, Work }
+{ None, Barrier, Ground, Wall, Furniture, Relax, Work }
 
 [Serializable]
 public enum JobType

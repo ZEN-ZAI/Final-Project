@@ -30,7 +30,7 @@ public class EmployeeManager : MonoBehaviour
         EmployeeData employeeData = new EmployeeData();
 
         employeeData.characterID = 1;
-        employeeData.name = "TED";
+        employeeData.employeeName = "TED";
         employeeData.employeeID = "emp"+0;
 
         employeeData.mood_max = UnityEngine.Random.Range(80, 150);
@@ -75,9 +75,9 @@ public class EmployeeManager : MonoBehaviour
         EmployeeData employeeData = EmployeeStructure.instance.GetMyEmployeeData(employeeID);
         Component component = ComponentAsset.instance.GetComponentAsset(componentData.componentID);
 
-        if (component.job.Contains(employeeData.jobs[0].jobType))
+        if (component.job.Contains(employeeData.jobs[employeeData.indexJob].jobType))
         {
-            return employeeData.jobs[0].level;
+            return employeeData.jobs[employeeData.indexJob].level;
         }
         else
         {
@@ -87,7 +87,7 @@ public class EmployeeManager : MonoBehaviour
 
     public void HireEmployee(EmployeeData employeeData)
     {
-        print("Hire: " + employeeData.name + " [ID:" + employeeData.employeeID + "]");
+        print("Hire: " + employeeData.employeeName + " [ID:" + employeeData.employeeID + "]");
         employeeData.MyEmployee();
         EmployeeStructure.instance.AddEmployeeData(employeeData);
 
@@ -118,11 +118,10 @@ public class EmployeeManager : MonoBehaviour
         employee_temp.GetComponent<StateController>().character = character;
         employee_temp.GetComponent<StateController>().employeeData = employeeData;
 
-        employee_temp.AddComponent<CapsuleCollider>().center = new Vector3(0,7,0);
-        employee_temp.GetComponent<CapsuleCollider>().radius = 4.5f;
+        employee_temp.AddComponent<CapsuleCollider>().center = new Vector3(0,7.5f,0);
+        employee_temp.GetComponent<CapsuleCollider>().radius = 2f;
         employee_temp.GetComponent<CapsuleCollider>().height = 15;
 
-        //employee_temp.name = employee_temp.name.Replace("(Clone)", "").Trim();
         employee_temp.name = employeeData.employeeID.ToString();
         employee_temp.layer = LayerMask.NameToLayer("Character");
 
@@ -135,7 +134,7 @@ public class EmployeeManager : MonoBehaviour
 
         employeeData.characterID = CharacterAsset.instance.RandomCharacterID();
         employeeData.employeeID = "emp"+UnityEngine.Random.Range(1, 9999999);
-        employeeData.name = "Emp:"+ employeeData.employeeID;
+        employeeData.employeeName = "Emp:"+ employeeData.employeeID;
 
         employeeData.employeeStatus = EmployeeStatus.Recruitment;
 

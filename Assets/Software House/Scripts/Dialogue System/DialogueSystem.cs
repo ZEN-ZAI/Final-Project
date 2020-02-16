@@ -117,12 +117,12 @@ public class DialogueSystem : MonoBehaviour
 
     public void NextParagraph()
     {
-        int index = ++ DialogueSequence.instance.currentParagraph;
+        int index = ++DialogueSequenceAsset.instance.currentParagraph;
 
-        if (DialogueSequence.instance.currentParagraph <= DialogueSequence.instance.CountParagraph)
+        if (DialogueSequenceAsset.instance.currentParagraph <= DialogueSequenceAsset.instance.CountParagraph)
         {
-            Dialogue dialogue = DialogueSequence.instance.GetDialogueInParagraph(index);
-            StartCoroutine(Delay(DialogueSequence.instance.GetStartDelayParagraph(index), ()=> StartDialogue(dialogue)));
+            Dialogue dialogue = DialogueSequenceAsset.instance.GetDialogueInParagraph(index);
+            StartCoroutine(Delay(DialogueSequenceAsset.instance.GetStartDelayParagraph(index), ()=> StartDialogue(dialogue)));
         }
     }
 

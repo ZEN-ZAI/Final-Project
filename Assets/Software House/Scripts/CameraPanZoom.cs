@@ -41,7 +41,7 @@ public class CameraPanZoom : MonoBehaviour
 	{
         if (active)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && AIControllerUI.instance.active == false)
             {
                 touchStart = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             }
@@ -60,7 +60,7 @@ public class CameraPanZoom : MonoBehaviour
 
                 zoom(difference * 0.1f);
             }
-            else if (Input.GetMouseButton(0))
+            else if (Input.GetMouseButton(0) && AIControllerUI.instance.active == false)
             {
                 Vector3 direction = touchStart - Camera.main.ScreenToWorldPoint(Input.mousePosition);
 

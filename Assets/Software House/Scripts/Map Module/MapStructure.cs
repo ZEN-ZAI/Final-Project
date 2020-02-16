@@ -10,6 +10,7 @@ namespace Data
     public class MapStructure
     {
         public List<ConstructData> ground_layer = new List<ConstructData>();
+        public List<ConstructData> barrier_layer = new List<ConstructData>();
 
         public Dictionary<string, ConstructData> wall_layer = new Dictionary<string, ConstructData>();
         public Dictionary<string, ConstructData> furniture_layer = new Dictionary<string, ConstructData>();
@@ -59,6 +60,14 @@ namespace Data
             }
 
             result["work_layer"] = result_work_layer;
+
+            Dictionary<string, object> result_barrier_layer = new Dictionary<string, object>();
+            for (int i = 0; i < barrier_layer.Count; i++)
+            {
+                result_barrier_layer.Add(i + "", barrier_layer[i].ToDictionary());
+            }
+
+            result["barrier_layer"] = result_barrier_layer;
 
             return result;
         }
@@ -149,6 +158,11 @@ public class MapStructure : MonoBehaviour
         }
     }
 
+    public void SetBarrierLayer(List<ConstructData> barrier_layer)
+    {
+        mapStructure.barrier_layer = barrier_layer;
+    }
+
     public List<ConstructData> GetGroundLayer()
     {
         return mapStructure.ground_layer;
@@ -196,6 +210,11 @@ public class MapStructure : MonoBehaviour
         }
 
         return temp;
+    }
+
+    public List<ConstructData> GetBarrierLayer()
+    {
+        return mapStructure.barrier_layer;
     }
 
     public Data.MapStructure GetMapStructure()

@@ -10,6 +10,8 @@ public class DestroyPanel : MonoBehaviour
 
     private void Awake()
     {
+        GetComponent<Button>().onClick.AddListener(()=> SoundManager.instance.PlaySound_ButtonClose() );
+
         GetComponent<Button>().onClick.AddListener(() =>
         {
             Destroy(rootPanel.gameObject);

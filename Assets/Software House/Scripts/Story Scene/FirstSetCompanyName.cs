@@ -14,7 +14,7 @@ public class FirstSetCompanyName : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (DialogueSequence.instance.currentParagraph > DialogueSequence.instance.CountParagraph
+        if (DialogueSequenceAsset.instance.currentParagraph > DialogueSequenceAsset.instance.CountParagraph
             && DialogueSystem.instance.sentancesQueue.Count == 0
             && !DialogueSystem.instance.nextButton.gameObject.activeSelf
             && !FindObjectOfType<SetCompanyName>().GetActive())
